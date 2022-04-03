@@ -1,0 +1,17 @@
+.nav {
+    grid-area: nav;
+    background-color: lightcyan;
+    padding: 10px;
+}
+.nav a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: black;
+}
+.nav a:hover {
+    color: green;
+}
+.nav :global(a.active) {
+    color: brown;
+}

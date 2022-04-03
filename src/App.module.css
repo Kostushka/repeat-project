@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-template-areas:
+        'header header header'
+        'nav main main'
+        'footer footer footer';
+}
+.main {
+    grid-area: main;
+    background-color: lightslategray;
+}
