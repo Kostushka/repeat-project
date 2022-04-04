@@ -5,13 +5,13 @@ import Footer from './components/Footer';
 
 import styles from './App.module.css';
 
-const App = () => {
+const App = ({ dialogs, posts }) => {
     return (
         <div className={styles.container}>
             <Header />
             <Navigation />
             <div className={styles.main}>
-                <AppRouter />
+                <AppRouter dialogs={dialogs} posts={posts} />
             </div>
             <Footer />
         </div>

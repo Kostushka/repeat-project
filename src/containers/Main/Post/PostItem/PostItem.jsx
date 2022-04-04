@@ -1,9 +1,9 @@
 import styles from './PostItem.module.css';
 
-const PostItem = ({ data }) => {
+const PostItem = ({ posts }) => {
     return (
         <div>
-            {data.map((el) => (
+            {posts.map((el) => (
                 <div key={el.id}>
                     <img
                         className={styles.img}
