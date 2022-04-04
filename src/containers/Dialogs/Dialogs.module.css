@@ -1,3 +1,7 @@
+.wrapper {
+    padding: 0 20px 20px 20px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 2fr 10fr;
@@ -9,9 +13,4 @@
 }
 .container :global(a.active) {
     color: brown;
-}
-
-.message {
-    color: greenyellow;
-    padding-bottom: 10px;
 }
