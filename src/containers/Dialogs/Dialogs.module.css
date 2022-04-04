@@ -1,0 +1,17 @@
+.container {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.container a {
+    text-decoration: none;
+    color: black;
+    padding-bottom: 10px;
+}
+.container :global(a.active) {
+    color: brown;
+}
+
+.message {
+    color: greenyellow;
+    padding-bottom: 10px;
+}

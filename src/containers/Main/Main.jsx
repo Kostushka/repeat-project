@@ -1,5 +1,6 @@
-import styles from './Main.module.css';
 import Post from './Post';
+
+import styles from './Main.module.css';
 
 const Main = () => {
     return (
@@ -9,7 +10,7 @@ const Main = () => {
                 src='https://plotnikov.spb.ru/wp-content/uploads/2017/05/all-vk.jpg'
                 alt='main'
             />
-            Основная часть
+            <div className={styles.main}>Основная часть</div>
             <Post />
         </main>
     );

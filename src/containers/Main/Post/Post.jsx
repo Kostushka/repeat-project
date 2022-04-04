@@ -1,4 +1,5 @@
 import PostItem from './PostItem';
+
 import styles from './Post.module.css';
 
 const Post = () => {
@@ -9,7 +10,7 @@ const Post = () => {
         { id: 4, message: 'Lala' },
     ];
     return (
-        <div>
+        <div className={styles.container}>
             <textarea />
             <div>
                 <button>Создать пост</button>
