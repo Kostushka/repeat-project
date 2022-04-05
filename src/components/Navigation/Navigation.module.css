@@ -15,3 +15,25 @@
 .nav :global(a.active) {
     color: brown;
 }
+
+.img {
+    width: 50px;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.container {
+    margin-top: 20px;
+    border: 1px dashed black;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 18px;
+    margin-left: 5px;
+}

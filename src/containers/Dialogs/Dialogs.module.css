@@ -4,7 +4,8 @@
 
 .container {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 10fr;
+    align-items: center;
 }
 .container a {
     text-decoration: none;

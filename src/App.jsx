@@ -9,7 +9,7 @@ const App = ({ state }) => {
     return (
         <div className={styles.container}>
             <Header />
-            <Navigation />
+            <Navigation friends={state.friendsPage.friends} />
             <div className={styles.main}>
                 <AppRouter state={state} />
             </div>
