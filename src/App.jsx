@@ -5,13 +5,13 @@ import Footer from './components/Footer';
 
 import styles from './App.module.css';
 
-const App = ({ dialogs, posts }) => {
+const App = ({ state }) => {
     return (
         <div className={styles.container}>
             <Header />
             <Navigation />
             <div className={styles.main}>
-                <AppRouter dialogs={dialogs} posts={posts} />
+                <AppRouter state={state} />
             </div>
             <Footer />
         </div>
