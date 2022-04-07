@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from '..';
+
 export const state = {
     mainPage: {
         posts: [
@@ -67,3 +69,25 @@ export const state = {
         ],
     },
 };
+
+export const addPost = (newMessage) => {
+    const newPost = {
+        id: Math.random(),
+        message: newMessage,
+    };
+    state.mainPage.posts.push(newPost);
+    rerenderEntireTree();
+};
+
+export const addMessage = (newMessage) => {
+    const newDialogs = {
+        id: Math.random(),
+        name: 'Неизвестный пользователь',
+        message: newMessage,
+        img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
+    };
+    state.dialogsPage.dialogs.push(newDialogs);
+    rerenderEntireTree();
+};
+
+window.state = state;

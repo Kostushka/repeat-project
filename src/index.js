@@ -2,19 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // import ReactDOM from 'react-dom';
-import { state } from './store/state';
+import { state, addPost, addMessage } from './store/state';
 import App from './App';
 
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App state={state} />
-        </BrowserRouter>
-    </React.StrictMode>
-);
+
+export const rerenderEntireTree = () => {
+    root.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <App state={state} addPost={addPost} addMessage={addMessage} />
+            </BrowserRouter>
+        </React.StrictMode>
+    );
+};
+rerenderEntireTree();
 
 // ReactDOMClient.createRoot(
 //     <React.StrictMode>

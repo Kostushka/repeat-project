@@ -3,16 +3,18 @@ import PostItem from './PostItem';
 
 import styles from './Post.module.css';
 
-const Post = ({ posts }) => {
+const Post = ({ posts, addPost }) => {
     const ref = useRef();
-    const onPostChange = () => {
-        console.log(ref.current.value);
+
+    const addNewPost = () => {
+        addPost(ref.current.value);
+        ref.current.value = '';
     };
     return (
         <div className={styles.container}>
-            <textarea ref={ref} onChange={onPostChange} />
+            <textarea ref={ref} />
             <div>
-                <button>Создать пост</button>
+                <button onClick={addNewPost}>Создать пост</button>
             </div>
             <PostItem posts={posts} />
         </div>

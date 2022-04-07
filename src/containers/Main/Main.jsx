@@ -3,11 +3,11 @@ import MainInfo from './MainInfo';
 
 import styles from './Main.module.css';
 
-const Main = ({ posts }) => {
+const Main = ({ posts, addPost }) => {
     return (
         <main>
             <MainInfo />
-            <Post posts={posts} />
+            <Post posts={posts} addPost={addPost} />
         </main>
     );
 };
