@@ -8,6 +8,7 @@ export const state = {
             { id: 3, message: 'Hey' },
             { id: 4, message: 'Lala' },
         ],
+        newPostText: '',
     },
     dialogsPage: {
         dialogs: [
@@ -48,6 +49,7 @@ export const state = {
                 img: 'https://practicalpie.com/wp-content/uploads/2020/04/John-B-Watson-1024x666.jpg',
             },
         ],
+        newDialogText: '',
     },
     friendsPage: {
         friends: [
@@ -79,6 +81,11 @@ export const addPost = (newMessage) => {
     rerenderEntireTree();
 };
 
+export const updatePostText = (postText) => {
+    state.mainPage.newPostText = postText;
+    rerenderEntireTree();
+};
+
 export const addMessage = (newMessage) => {
     const newDialogs = {
         id: Math.random(),
@@ -87,6 +94,11 @@ export const addMessage = (newMessage) => {
         img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
     };
     state.dialogsPage.dialogs.push(newDialogs);
+    rerenderEntireTree();
+};
+
+export const updateMessageText = (messageText) => {
+    state.dialogsPage.newDialogText = messageText;
     rerenderEntireTree();
 };
 

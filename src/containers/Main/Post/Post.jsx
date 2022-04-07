@@ -3,16 +3,24 @@ import PostItem from './PostItem';
 
 import styles from './Post.module.css';
 
-const Post = ({ posts, addPost }) => {
+const Post = ({ posts, newPostText, addPost, updatePostText }) => {
     const ref = useRef();
 
     const addNewPost = () => {
         addPost(ref.current.value);
-        ref.current.value = '';
+        updatePostText('');
+    };
+    const onPostChange = () => {
+        updatePostText(ref.current.value);
     };
     return (
         <div className={styles.container}>
-            <textarea ref={ref} />
+            <textarea
+                placeholder='Введите текст'
+                ref={ref}
+                value={newPostText}
+                onChange={onPostChange}
+            />
             <div>
                 <button onClick={addNewPost}>Создать пост</button>
             </div>

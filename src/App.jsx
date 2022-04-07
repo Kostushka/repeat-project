@@ -5,7 +5,13 @@ import Footer from './components/Footer';
 
 import styles from './App.module.css';
 
-const App = ({ state, addPost, addMessage }) => {
+const App = ({
+    state,
+    addPost,
+    addMessage,
+    updatePostText,
+    updateMessageText,
+}) => {
     return (
         <div className={styles.container}>
             <Header />
@@ -15,6 +21,8 @@ const App = ({ state, addPost, addMessage }) => {
                     state={state}
                     addPost={addPost}
                     addMessage={addMessage}
+                    updatePostText={updatePostText}
+                    updateMessageText={updateMessageText}
                 />
             </div>
             <Footer />

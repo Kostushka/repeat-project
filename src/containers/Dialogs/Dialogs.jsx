@@ -4,12 +4,15 @@ import Message from './Message';
 
 import styles from './Dialogs.module.css';
 
-const Dialogs = ({ dialogs, addMessage }) => {
+const Dialogs = ({ dialogs, addMessage, newDialogText, updateMessageText }) => {
     const ref = useRef();
 
     const addNewMessage = () => {
         addMessage(ref.current.value);
-        ref.current.value = '';
+        updateMessageText('');
+    };
+    const onMessageChange = () => {
+        updateMessageText(ref.current.value);
     };
     return (
         <div className={styles.wrapper}>
@@ -23,7 +26,12 @@ const Dialogs = ({ dialogs, addMessage }) => {
                 ))}
             </div>
             <div>
-                <textarea ref={ref} />
+                <textarea
+                    placeholder='Введите текст'
+                    ref={ref}
+                    value={newDialogText}
+                    onChange={onMessageChange}
+                />
                 <div>
                     <button onClick={addNewMessage}>Добавить сообщение</button>
                 </div>
