@@ -8,8 +8,7 @@ const Dialogs = ({ dialogs, addMessage, newDialogText, updateMessageText }) => {
     const ref = useRef();
 
     const addNewMessage = () => {
-        addMessage(ref.current.value);
-        updateMessageText('');
+        addMessage();
     };
     const onMessageChange = () => {
         updateMessageText(ref.current.value);

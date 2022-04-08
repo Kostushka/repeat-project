@@ -7,8 +7,7 @@ const Post = ({ posts, newPostText, addPost, updatePostText }) => {
     const ref = useRef();
 
     const addNewPost = () => {
-        addPost(ref.current.value);
-        updatePostText('');
+        addPost();
     };
     const onPostChange = () => {
         updatePostText(ref.current.value);

@@ -72,12 +72,13 @@ export const state = {
     },
 };
 
-export const addPost = (newMessage) => {
+export const addPost = () => {
     const newPost = {
         id: Math.random(),
-        message: newMessage,
+        message: state.mainPage.newPostText,
     };
     state.mainPage.posts.push(newPost);
+    state.mainPage.newPostText = '';
     rerenderEntireTree();
 };
 
@@ -86,14 +87,15 @@ export const updatePostText = (postText) => {
     rerenderEntireTree();
 };
 
-export const addMessage = (newMessage) => {
+export const addMessage = () => {
     const newDialogs = {
         id: Math.random(),
         name: 'Неизвестный пользователь',
-        message: newMessage,
+        message: state.dialogsPage.newDialogText,
         img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
     };
     state.dialogsPage.dialogs.push(newDialogs);
+    state.dialogsPage.newDialogText = '';
     rerenderEntireTree();
 };
 
