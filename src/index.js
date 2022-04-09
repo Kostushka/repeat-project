@@ -8,6 +8,7 @@ import {
     addMessage,
     updatePostText,
     updateMessageText,
+    subscribe,
 } from './store/state';
 import App from './App';
 
@@ -15,7 +16,7 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-export const rerenderEntireTree = () => {
+const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -30,7 +31,10 @@ export const rerenderEntireTree = () => {
         </React.StrictMode>
     );
 };
+
 rerenderEntireTree();
+
+subscribe(rerenderEntireTree);
 
 // ReactDOMClient.createRoot(
 //     <React.StrictMode>

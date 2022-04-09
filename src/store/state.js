@@ -1,4 +1,8 @@
-import { rerenderEntireTree } from '..';
+let rerenderEntireTree = () => {};
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
+};
 
 export const state = {
     mainPage: {
