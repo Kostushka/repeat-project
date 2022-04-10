@@ -2,14 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // import ReactDOM from 'react-dom';
-import {
-    state,
-    addPost,
-    addMessage,
-    updatePostText,
-    updateMessageText,
-    subscribe,
-} from './store/state';
+import { store } from './store/state';
 import App from './App';
 
 import './index.css';
@@ -20,13 +13,7 @@ const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    state={state}
-                    addPost={addPost}
-                    addMessage={addMessage}
-                    updatePostText={updatePostText}
-                    updateMessageText={updateMessageText}
-                />
+                <App store={store} />
             </BrowserRouter>
         </React.StrictMode>
     );
@@ -34,7 +21,7 @@ const rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-subscribe(rerenderEntireTree);
+store.subscribe = rerenderEntireTree; // используем сеттер для передачи rerenderEntireTree для перерисовки
 
 // ReactDOMClient.createRoot(
 //     <React.StrictMode>

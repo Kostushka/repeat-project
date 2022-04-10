@@ -5,25 +5,15 @@ import Footer from './components/Footer';
 
 import styles from './App.module.css';
 
-const App = ({
-    state,
-    addPost,
-    addMessage,
-    updatePostText,
-    updateMessageText,
-}) => {
+const App = ({ store }) => {
     return (
         <div className={styles.container}>
             <Header />
-            <Navigation friends={state.friendsPage.friends} />
+            <Navigation
+                friends={store.getState.friendsPage.friends} // геттер getState вызывается без ()
+            />
             <div className={styles.main}>
-                <AppRouter
-                    state={state}
-                    addPost={addPost}
-                    addMessage={addMessage}
-                    updatePostText={updatePostText}
-                    updateMessageText={updateMessageText}
-                />
+                <AppRouter store={store} />
             </div>
             <Footer />
         </div>
