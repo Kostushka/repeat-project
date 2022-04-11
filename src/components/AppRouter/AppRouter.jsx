@@ -15,8 +15,7 @@ const AppRouter = ({ store }) => {
                     <Main
                         posts={store.getState.mainPage.posts} // геттер getState вызывается без ()
                         newPostText={store.getState.mainPage.newPostText}
-                        addPost={store.addPost.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
-                        updatePostText={store.updatePostText.bind(store)} // метод вызываем в компоненте на изменение textarea в колбэке, контекст теряется
+                        dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
             />
@@ -26,8 +25,7 @@ const AppRouter = ({ store }) => {
                     <Main
                         posts={store.getState.mainPage.posts} // геттер getState вызывается без ()
                         newPostText={store.getState.mainPage.newPostText}
-                        addPost={store.addPost.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
-                        updatePostText={store.updatePostText.bind(store)} // метод вызываем в компоненте на изменение textarea в колбэке, контекст теряется
+                        dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
             />
@@ -37,8 +35,7 @@ const AppRouter = ({ store }) => {
                     <Dialogs
                         dialogs={store.getState.dialogsPage.dialogs} // геттер getState вызывается без ()
                         newDialogText={store.getState.dialogsPage.newDialogText}
-                        addMessage={store.addMessage.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
-                        updateMessageText={store.updateMessageText.bind(store)} // метод вызываем в компоненте на изменение textarea в колбэке, контекст теряется
+                        dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
             />
@@ -48,8 +45,7 @@ const AppRouter = ({ store }) => {
                     <Dialogs
                         dialogs={store.getState.dialogsPage.dialogs} // геттер getState вызывается без ()
                         newDialogText={store.getState.dialogsPage.newDialogText}
-                        addMessage={store.addMessage.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
-                        updateMessageText={store.updateMessageText.bind(store)} // метод вызываем в компоненте на изменение textarea в колбэке, контекст теряется
+                        dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
             />

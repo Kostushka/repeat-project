@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD_POST';
+const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+const UPDATE_MESSAGE_TEXT = 'UPDATE_MESSAGE_TEXT';
+
 export const store = {
     _state: {
         mainPage: {
@@ -75,39 +80,52 @@ export const store = {
     get getState() {
         return this._state;
     },
-
     set subscribe(observer) {
         this._callsubscriber = observer;
     },
 
-    addPost() {
-        const newPost = {
-            id: Math.random(),
-            message: this._state.mainPage.newPostText,
-        };
-        this._state.mainPage.posts.push(newPost);
-        this._state.mainPage.newPostText = '';
-        this._callsubscriber();
-    },
-    updatePostText(postText) {
-        this._state.mainPage.newPostText = postText;
-        this._callsubscriber();
-    },
-    addMessage() {
-        const newDialogs = {
-            id: Math.random(),
-            name: 'Неизвестный пользователь',
-            message: this._state.dialogsPage.newDialogText,
-            img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
-        };
-        this._state.dialogsPage.dialogs.push(newDialogs);
-        this._state.dialogsPage.newDialogText = '';
-        this._callsubscriber();
-    },
-    updateMessageText(messageText) {
-        this._state.dialogsPage.newDialogText = messageText;
-        this._callsubscriber();
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            const newPost = {
+                id: Math.random(),
+                message: this._state.mainPage.newPostText,
+            };
+            this._state.mainPage.posts.push(newPost);
+            this._state.mainPage.newPostText = '';
+            this._callsubscriber();
+        } else if (action.type === UPDATE_POST_TEXT) {
+            this._state.mainPage.newPostText = action.postText;
+            this._callsubscriber();
+        } else if (action.type === ADD_MESSAGE) {
+            const newDialogs = {
+                id: Math.random(),
+                name: 'Неизвестный пользователь',
+                message: this._state.dialogsPage.newDialogText,
+                img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
+            };
+            this._state.dialogsPage.dialogs.push(newDialogs);
+            this._state.dialogsPage.newDialogText = '';
+            this._callsubscriber();
+        } else if (action.type === UPDATE_MESSAGE_TEXT) {
+            this._state.dialogsPage.newDialogText = action.messageText;
+            this._callsubscriber();
+        }
     },
 };
+
+export const addPostActionCreator = () => ({
+    type: ADD_POST,
+});
+export const updatePostTextActionCreator = (postText) => ({
+    type: UPDATE_POST_TEXT,
+    postText,
+});
+export const addMessageActionCreator = () => ({
+    type: ADD_MESSAGE,
+});
+export const updateMessageTextActionCreator = (messageText) => ({
+    type: UPDATE_MESSAGE_TEXT,
+    messageText,
+});
 
 window.store = store;

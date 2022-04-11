@@ -1,16 +1,19 @@
 import { useRef } from 'react';
 import PostItem from './PostItem';
-
+import {
+    addPostActionCreator,
+    updatePostTextActionCreator,
+} from '../../../store/state';
 import styles from './Post.module.css';
 
-const Post = ({ posts, newPostText, addPost, updatePostText }) => {
+const Post = ({ posts, newPostText, dispatch }) => {
     const ref = useRef();
 
     const addNewPost = () => {
-        addPost();
+        dispatch(addPostActionCreator());
     };
     const onPostChange = () => {
-        updatePostText(ref.current.value);
+        dispatch(updatePostTextActionCreator(ref.current.value));
     };
     return (
         <div className={styles.container}>

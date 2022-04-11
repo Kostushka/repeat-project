@@ -1,17 +1,20 @@
 import { useRef } from 'react';
 import UserName from './UserName';
 import Message from './Message';
-
+import {
+    addMessageActionCreator,
+    updateMessageTextActionCreator,
+} from '../../store/state';
 import styles from './Dialogs.module.css';
 
-const Dialogs = ({ dialogs, addMessage, newDialogText, updateMessageText }) => {
+const Dialogs = ({ dialogs, newDialogText, dispatch }) => {
     const ref = useRef();
 
     const addNewMessage = () => {
-        addMessage();
+        dispatch(addMessageActionCreator());
     };
     const onMessageChange = () => {
-        updateMessageText(ref.current.value);
+        dispatch(updateMessageTextActionCreator(ref.current.value));
     };
     return (
         <div className={styles.wrapper}>
