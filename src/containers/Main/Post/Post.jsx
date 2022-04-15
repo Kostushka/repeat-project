@@ -3,7 +3,8 @@ import PostItem from './PostItem';
 import {
     addPostActionCreator,
     updatePostTextActionCreator,
-} from '../../../store/state';
+} from '../../../store/reducers/mainPage-reducer';
+
 import styles from './Post.module.css';
 
 const Post = ({ posts, newPostText, dispatch }) => {

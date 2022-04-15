@@ -4,7 +4,8 @@ import Message from './Message';
 import {
     addMessageActionCreator,
     updateMessageTextActionCreator,
-} from '../../store/state';
+} from '../../store/reducers/dialogsPage-reducer';
+
 import styles from './Dialogs.module.css';
 
 const Dialogs = ({ dialogs, newDialogText, dispatch }) => {
