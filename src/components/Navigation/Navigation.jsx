@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import Friends from './Friends';
 
 import styles from './Navigation.module.css';
 
-const Navigation = ({ friends }) => {
+const Navigation = ({ friends, dispatch, newFriendName }) => {
     return (
         <>
             <nav className={styles.nav}>
@@ -11,19 +12,11 @@ const Navigation = ({ friends }) => {
                 <NavLink to='/news'>Новости</NavLink>
                 <NavLink to='/images'>Галерая</NavLink>
                 <NavLink to='social'>Группы</NavLink>
-                <div className={styles.container}>
-                    <h1 className={styles.title}>Друзья</h1>
-                    {friends.map((el) => (
-                        <div className={styles.wrapper} key={el.id}>
-                            <img
-                                className={styles.img}
-                                src={el.img}
-                                alt='friend'
-                            />
-                            {el.name}
-                        </div>
-                    ))}
-                </div>
+                <Friends
+                    friends={friends}
+                    newFriendName={newFriendName}
+                    dispatch={dispatch}
+                />
             </nav>
         </>
     );

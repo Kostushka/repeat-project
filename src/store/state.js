@@ -1,4 +1,5 @@
 import { dialogsPageReducer } from './reducers/dialogsPage-reducer';
+import { friendsPageReducer } from './reducers/friendsPage-reducer';
 import { mainPageReducer } from './reducers/mainPage-reducer';
 
 export const store = {
@@ -71,6 +72,7 @@ export const store = {
                     img: 'https://practicalpie.com/wp-content/uploads/2020/05/Abraham-Maslow-768x499.jpg',
                 },
             ],
+            newFriendName: '',
         },
     },
     _callsubscriber() {},
@@ -85,6 +87,7 @@ export const store = {
     dispatch(action) {
         mainPageReducer(this._state.mainPage, action);
         dialogsPageReducer(this._state.dialogsPage, action);
+        friendsPageReducer(this._state.friendsPage, action);
         this._callsubscriber();
     },
 };

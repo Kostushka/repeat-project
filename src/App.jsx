@@ -11,6 +11,8 @@ const App = ({ store }) => {
             <Header />
             <Navigation
                 friends={store.getState.friendsPage.friends} // геттер getState вызывается без ()
+                newFriendName={store.getState.friendsPage.newFriendName}
+                dispatch={store.dispatch.bind(store)}
             />
             <div className={styles.main}>
                 <AppRouter store={store} />
