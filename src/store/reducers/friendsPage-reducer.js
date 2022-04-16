@@ -1,7 +1,28 @@
 const UPDATE_NEW_FRIENDS_NAME = 'UPDATE_NEW_FRIENDS_NAME';
 const ADD_FRIEND = 'ADD_FRIEND';
 
-export const friendsPageReducer = (state, action) => {
+const initialState = {
+    friends: [
+        {
+            id: 1,
+            name: 'Альберт',
+            img: 'https://practicalpie.com/wp-content/uploads/2020/04/03-Albert-Bandura.jpg',
+        },
+        {
+            id: 2,
+            name: 'Альфред',
+            img: 'https://practicalpie.com/wp-content/uploads/2021/03/Alfred-Adler-768x499.jpg',
+        },
+        {
+            id: 3,
+            name: 'Абрахам',
+            img: 'https://practicalpie.com/wp-content/uploads/2020/05/Abraham-Maslow-768x499.jpg',
+        },
+    ],
+    newFriendName: '',
+};
+
+export const friendsPageReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_FRIENDS_NAME:
             state.newFriendName = action.newName;

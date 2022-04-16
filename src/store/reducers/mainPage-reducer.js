@@ -1,7 +1,17 @@
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
 
-export const mainPageReducer = (state, action) => {
+const initialState = {
+    posts: [
+        { id: 1, message: 'Hello' },
+        { id: 2, message: 'Hi' },
+        { id: 3, message: 'Hey' },
+        { id: 4, message: 'Lala' },
+    ],
+    newPostText: '',
+};
+
+export const mainPageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {

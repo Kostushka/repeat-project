@@ -13,8 +13,8 @@ const AppRouter = ({ store }) => {
                 path='/'
                 element={
                     <Main
-                        posts={store.getState.mainPage.posts} // геттер getState вызывается без ()
-                        newPostText={store.getState.mainPage.newPostText}
+                        posts={store.getState().mainPage.posts}
+                        newPostText={store.getState().mainPage.newPostText}
                         dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
@@ -23,8 +23,8 @@ const AppRouter = ({ store }) => {
                 path='main'
                 element={
                     <Main
-                        posts={store.getState.mainPage.posts} // геттер getState вызывается без ()
-                        newPostText={store.getState.mainPage.newPostText}
+                        posts={store.getState().mainPage.posts}
+                        newPostText={store.getState().mainPage.newPostText}
                         dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
@@ -33,8 +33,10 @@ const AppRouter = ({ store }) => {
                 path='dialogs'
                 element={
                     <Dialogs
-                        dialogs={store.getState.dialogsPage.dialogs} // геттер getState вызывается без ()
-                        newDialogText={store.getState.dialogsPage.newDialogText}
+                        dialogs={store.getState().dialogsPage.dialogs}
+                        newDialogText={
+                            store.getState().dialogsPage.newDialogText
+                        }
                         dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }
@@ -43,8 +45,10 @@ const AppRouter = ({ store }) => {
                 path='dialogs/:id'
                 element={
                     <Dialogs
-                        dialogs={store.getState.dialogsPage.dialogs} // геттер getState вызывается без ()
-                        newDialogText={store.getState.dialogsPage.newDialogText}
+                        dialogs={store.getState().dialogsPage.dialogs}
+                        newDialogText={
+                            store.getState().dialogsPage.newDialogText
+                        }
                         dispatch={store.dispatch.bind(store)} // метод вызываем в компоненте на нажатие кнопки в колбэке, контекст теряется
                     />
                 }

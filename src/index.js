@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // import ReactDOM from 'react-dom';
-import { store } from './store/state';
+import { store } from './store/store';
 import App from './App';
 
 import './index.css';
@@ -21,7 +21,9 @@ const rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-store.subscribe = rerenderEntireTree; // используем сеттер для передачи rerenderEntireTree для перерисовки
+store.subscribe(() => {
+    rerenderEntireTree();
+});
 
 // ReactDOMClient.createRoot(
 //     <React.StrictMode>
