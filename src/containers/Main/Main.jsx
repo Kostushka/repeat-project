@@ -1,13 +1,15 @@
-import Post from './Post';
 import MainInfo from './MainInfo';
-
-import styles from './Main.module.css';
+import PostContainer from './PostContainer/PostContainer';
 
 const Main = ({ posts, newPostText, dispatch }) => {
     return (
         <main>
             <MainInfo />
-            <Post posts={posts} newPostText={newPostText} dispatch={dispatch} />
+            <PostContainer
+                posts={posts}
+                newPostText={newPostText}
+                dispatch={dispatch}
+            />
         </main>
     );
 };

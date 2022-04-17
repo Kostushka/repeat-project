@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import Friends from './Friends';
+import FriendsContainer from './FriendsContainer';
 
 import styles from './Navigation.module.css';
 
@@ -12,7 +12,7 @@ const Navigation = ({ friends, dispatch, newFriendName }) => {
                 <NavLink to='/news'>Новости</NavLink>
                 <NavLink to='/images'>Галерая</NavLink>
                 <NavLink to='social'>Группы</NavLink>
-                <Friends
+                <FriendsContainer
                     friends={friends}
                     newFriendName={newFriendName}
                     dispatch={dispatch}

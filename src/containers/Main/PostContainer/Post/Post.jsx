@@ -1,20 +1,22 @@
 import { useRef } from 'react';
 import PostItem from './PostItem';
-import {
-    addPostActionCreator,
-    updatePostTextActionCreator,
-} from '../../../store/reducers/mainPage-reducer';
 
 import styles from './Post.module.css';
 
-const Post = ({ posts, newPostText, dispatch }) => {
+const Post = ({
+    posts,
+    newPostText,
+    onChangePost,
+    onClickChangePostButton,
+}) => {
     const ref = useRef();
 
     const addNewPost = () => {
-        dispatch(addPostActionCreator());
+        onClickChangePostButton();
     };
     const onPostChange = () => {
-        dispatch(updatePostTextActionCreator(ref.current.value));
+        const value = ref.current.value;
+        onChangePost(value);
     };
     return (
         <div className={styles.container}>

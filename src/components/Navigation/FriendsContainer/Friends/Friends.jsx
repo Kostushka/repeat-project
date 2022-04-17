@@ -1,15 +1,17 @@
-import {
-    addFriendActionCreator,
-    updateNewFriendsNameActionCreator,
-} from '../../../store/reducers/friendsPage-reducer';
 import styles from './Friends.module.css';
 
-const Friends = ({ friends, newFriendName, dispatch }) => {
+const Friends = ({
+    friends,
+    newFriendName,
+    onChangeName,
+    onClickChangeNameButton,
+}) => {
     const handleChange = (e) => {
-        dispatch(updateNewFriendsNameActionCreator(e.target.value));
+        const value = e.target.value;
+        onChangeName(value); //просто функция колбэк
     };
     const handleClick = () => {
-        dispatch(addFriendActionCreator());
+        onClickChangeNameButton(); //просто функция колбэк
     };
     return (
         <div className={styles.container}>

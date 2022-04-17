@@ -1,21 +1,23 @@
 import { useRef } from 'react';
 import UserName from './UserName';
 import Message from './Message';
-import {
-    addMessageActionCreator,
-    updateMessageTextActionCreator,
-} from '../../store/reducers/dialogsPage-reducer';
 
 import styles from './Dialogs.module.css';
 
-const Dialogs = ({ dialogs, newDialogText, dispatch }) => {
+const Dialogs = ({
+    dialogs,
+    newDialogText,
+    onChangeMessage,
+    onClickChangeMessage,
+}) => {
     const ref = useRef();
 
     const addNewMessage = () => {
-        dispatch(addMessageActionCreator());
+        onClickChangeMessage(); //просто функция колбэк
     };
     const onMessageChange = () => {
-        dispatch(updateMessageTextActionCreator(ref.current.value));
+        const value = ref.current.value;
+        onChangeMessage(value); //просто функция колбэк
     };
     return (
         <div className={styles.wrapper}>

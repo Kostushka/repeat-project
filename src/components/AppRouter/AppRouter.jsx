@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Dialogs from '../../containers/Dialogs';
+import DialogsContainer from '../../containers/DialogsContainer';
 import Main from '../../containers/Main';
 // import { configRoutes } from '../../routes/configRoutes';
 
@@ -32,7 +32,7 @@ const AppRouter = ({ store }) => {
             <Route
                 path='dialogs'
                 element={
-                    <Dialogs
+                    <DialogsContainer
                         dialogs={store.getState().dialogsPage.dialogs}
                         newDialogText={
                             store.getState().dialogsPage.newDialogText
@@ -44,7 +44,7 @@ const AppRouter = ({ store }) => {
             <Route
                 path='dialogs/:id'
                 element={
-                    <Dialogs
+                    <DialogsContainer
                         dialogs={store.getState().dialogsPage.dialogs}
                         newDialogText={
                             store.getState().dialogsPage.newDialogText
