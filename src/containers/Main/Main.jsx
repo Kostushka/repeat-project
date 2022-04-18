@@ -1,15 +1,11 @@
 import MainInfo from './MainInfo';
 import PostContainer from './PostContainer/PostContainer';
 
-const Main = ({ posts, newPostText, dispatch }) => {
+const Main = () => {
     return (
         <main>
             <MainInfo />
-            <PostContainer
-                posts={posts}
-                newPostText={newPostText}
-                dispatch={dispatch}
-            />
+            <PostContainer />
         </main>
     );
 };

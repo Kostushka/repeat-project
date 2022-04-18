@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // import ReactDOM from 'react-dom';
 import { store } from './store/store';
+import { StoreContext } from './storeContext';
 import App from './App';
 
 import './index.css';
@@ -13,7 +14,9 @@ const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App store={store} />
+                <StoreContext.Provider value={store}>
+                    <App />
+                </StoreContext.Provider>
             </BrowserRouter>
         </React.StrictMode>
     );

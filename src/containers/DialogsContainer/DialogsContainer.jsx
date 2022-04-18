@@ -2,23 +2,32 @@ import {
     addMessageActionCreator,
     updateMessageTextActionCreator,
 } from '../../store/reducers/dialogsPage-reducer';
+import { StoreContext } from '../../storeContext';
 import Dialogs from './Dialogs';
 
-const DialogsContainer = ({ dialogs, newDialogText, dispatch }) => {
-    const onChangeMessage = (value) => {
-        dispatch(updateMessageTextActionCreator(value));
-    };
-    const onClickChangeMessage = () => {
-        dispatch(addMessageActionCreator());
-    };
+const DialogsContainer = () => {
     return (
         <>
-            <Dialogs
-                dialogs={dialogs}
-                newDialogText={newDialogText}
-                onChangeMessage={onChangeMessage}
-                onClickChangeMessage={onClickChangeMessage}
-            />
+            <StoreContext.Consumer>
+                {(store) => {
+                    const onChangeMessage = (value) => {
+                        store.dispatch(updateMessageTextActionCreator(value));
+                    };
+                    const onClickChangeMessage = () => {
+                        store.dispatch(addMessageActionCreator());
+                    };
+                    return (
+                        <Dialogs
+                            dialogs={store.getState().dialogsPage.dialogs}
+                            newDialogText={
+                                store.getState().dialogsPage.newDialogText
+                            }
+                            onChangeMessage={onChangeMessage}
+                            onClickChangeMessage={onClickChangeMessage}
+                        />
+                    );
+                }}
+            </StoreContext.Consumer>
         </>
     );
 };

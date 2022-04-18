@@ -3,7 +3,7 @@ import FriendsContainer from './FriendsContainer';
 
 import styles from './Navigation.module.css';
 
-const Navigation = ({ friends, dispatch, newFriendName }) => {
+const Navigation = () => {
     return (
         <>
             <nav className={styles.nav}>
@@ -12,11 +12,7 @@ const Navigation = ({ friends, dispatch, newFriendName }) => {
                 <NavLink to='/news'>Новости</NavLink>
                 <NavLink to='/images'>Галерая</NavLink>
                 <NavLink to='social'>Группы</NavLink>
-                <FriendsContainer
-                    friends={friends}
-                    newFriendName={newFriendName}
-                    dispatch={dispatch}
-                />
+                <FriendsContainer />
             </nav>
         </>
     );
