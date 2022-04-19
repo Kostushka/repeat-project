@@ -18,12 +18,16 @@ export const mainPageReducer = (state = initialState, action) => {
                 id: Math.random(),
                 message: state.newPostText,
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
+            // state.posts.push(newPost);
+            // state.newPostText = '';
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: '',
+            };
         case UPDATE_POST_TEXT:
-            state.newPostText = action.postText;
-            return state;
+            // state.newPostText = action.postText;
+            return { ...state, newPostText: action.postText };
         default:
             return state;
     }

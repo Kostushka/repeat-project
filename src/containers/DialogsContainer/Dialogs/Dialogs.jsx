@@ -3,6 +3,7 @@ import UserName from './UserName';
 import Message from './Message';
 
 import styles from './Dialogs.module.css';
+import { useSelector } from 'react-redux';
 
 const Dialogs = ({
     dialogs,

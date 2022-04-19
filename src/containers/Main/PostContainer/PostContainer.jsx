@@ -1,31 +1,22 @@
+import { connect } from 'react-redux';
 import {
     addPostActionCreator,
     updatePostTextActionCreator,
 } from '../../../store/reducers/mainPage-reducer';
-import { StoreContext } from '../../../storeContext';
 import Post from './Post';
 
-const PostContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                const onChangePost = (value) => {
-                    store.dispatch(updatePostTextActionCreator(value));
-                };
-                const onClickChangePostButton = () => {
-                    store.dispatch(addPostActionCreator());
-                };
-                return (
-                    <Post
-                        posts={store.getState().mainPage.posts}
-                        newPostText={store.getState().mainPage.newPostText}
-                        onChangePost={onChangePost}
-                        onClickChangePostButton={onClickChangePostButton}
-                    />
-                );
-            }}
-        </StoreContext.Consumer>
-    );
-};
+const mapStateToProps = (state) => ({
+    posts: state.mainPage.posts,
+    newPostText: state.mainPage.newPostText,
+});
+const mapDispatchToProps = (dispatch) => ({
+    onChangePost(value) {
+        dispatch(updatePostTextActionCreator(value));
+    },
+    onClickChangePostButton() {
+        dispatch(addPostActionCreator());
+    },
+});
+const PostContainer = connect(mapStateToProps, mapDispatchToProps)(Post);
 
 export default PostContainer;

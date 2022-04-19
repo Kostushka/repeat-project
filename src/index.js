@@ -3,30 +3,22 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // import ReactDOM from 'react-dom';
 import { store } from './store/store';
-import { StoreContext } from './storeContext';
 import App from './App';
 
 import './index.css';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const rerenderEntireTree = () => {
-    root.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <StoreContext.Provider value={store}>
-                    <App />
-                </StoreContext.Provider>
-            </BrowserRouter>
-        </React.StrictMode>
-    );
-};
-
-rerenderEntireTree();
-
-store.subscribe(() => {
-    rerenderEntireTree();
-});
+root.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </React.StrictMode>
+);
 
 // ReactDOMClient.createRoot(
 //     <React.StrictMode>

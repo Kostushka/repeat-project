@@ -52,12 +52,16 @@ export const dialogsPageReducer = (state = initialState, action) => {
                 message: state.newDialogText,
                 img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
             };
-            state.dialogs.push(newDialogs);
-            state.newDialogText = '';
-            return state;
+            // state.dialogs.push(newDialogs);
+            // state.newDialogText = '';
+            return {
+                ...state,
+                dialogs: [...state.dialogs, newDialogs],
+                newDialogText: '',
+            };
         case UPDATE_MESSAGE_TEXT:
-            state.newDialogText = action.messageText;
-            return state;
+            // state.newDialogText = action.messageText;
+            return { ...state, newDialogText: action.messageText };
         default:
             return state;
     }
