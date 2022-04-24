@@ -9,6 +9,7 @@ const Navigation = () => {
             <nav className={styles.nav}>
                 <NavLink to='/main'>Главная</NavLink>
                 <NavLink to='/dialogs'>Диалоги</NavLink>
+                <NavLink to='/users'>Пользователи</NavLink>
                 <NavLink to='/news'>Новости</NavLink>
                 <NavLink to='/images'>Галерая</NavLink>
                 <NavLink to='social'>Группы</NavLink>

@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import DialogsContainer from '../../containers/DialogsContainer';
 import Main from '../../containers/Main';
+import UsersContainer from '../../containers/UsersContainer';
 // import { configRoutes } from '../../routes/configRoutes';
 
 const AppRouter = () => {
@@ -13,6 +14,7 @@ const AppRouter = () => {
             <Route path='main' element={<Main />} />
             <Route path='dialogs' element={<DialogsContainer />} />
             <Route path='dialogs/:id' element={<DialogsContainer />} />
+            <Route path='users' element={<UsersContainer />} />
         </Routes>
     );
 };
