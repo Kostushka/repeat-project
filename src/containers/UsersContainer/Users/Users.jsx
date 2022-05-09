@@ -9,15 +9,52 @@ import axios from 'axios';
 import styles from './Users.module.css';
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
+    // }
+    componentDidMount() {
         axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
-            .then((data) => props.getUsers(data.data.items));
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
+            )
+            .then((data) => {
+                this.props.getUsers(data.data.items);
+                this.props.getUsersTotalCount(data.data.totalCount);
+            });
     }
+    onPageChange = (page) => {
+        this.props.setCurrentPage(page);
+        axios
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
+            )
+            .then((data) => this.props.getUsers(data.data.items));
+    };
     render() {
+        const pagesCount = Math.ceil(
+            this.props.usersTotalCount / this.props.usersCount
+        );
+        const pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
         return (
             <>
+                <div className={styles.pages_container}>
+                    {pages.map((page) => (
+                        <span
+                            key={page}
+                            className={
+                                (this.props.currentPage === page &&
+                                    styles.current_page) ||
+                                styles.page
+                            }
+                            onClick={() => this.onPageChange(page)}
+                        >
+                            {page}
+                        </span>
+                    ))}
+                </div>
                 {this.props.users.map((el) => (
                     <div key={el.id}>
                         <img

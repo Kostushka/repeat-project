@@ -1,3 +1,27 @@
 .img {
     width: 200px;
 }
+.pages_container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 5px;
+}
+
+.page {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px 7px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+.page:hover {
+    background-color: rgba(230, 131, 61, 0.767);
+}
+.current_page {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px 7px;
+    margin: 5px 5px;
+    font-weight: bold;
+    background-color: chocolate;
+}
