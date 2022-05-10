@@ -1,3 +1,5 @@
+import React from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import {
     followActionCreator,
@@ -7,6 +9,40 @@ import {
     unfollowActionCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
+
+class UsersApiComponent extends React.Component {
+    componentDidMount() {
+        axios
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
+            )
+            .then((data) => {
+                this.props.getUsers(data.data.items);
+                this.props.getUsersTotalCount(data.data.totalCount);
+            });
+    }
+    onPageChange = (page) => {
+        this.props.setCurrentPage(page);
+        axios
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
+            )
+            .then((data) => this.props.getUsers(data.data.items));
+    };
+    render() {
+        return (
+            <Users
+                usersTotalCount={this.props.usersTotalCount}
+                usersCount={this.props.usersCount}
+                currentPage={this.props.currentPage}
+                onPageChange={this.onPageChange}
+                users={this.props.users}
+                unfollow={this.props.unfollow}
+                follow={this.props.follow}
+            />
+        );
+    }
+}
 
 const mapStateToProps = (state) => ({
     users: state.usersPage.users,
@@ -25,12 +61,15 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(getUsersActionCreator(users));
     },
     setCurrentPage: (page) => {
-        dispatch(setCurrentPageActionCreator(page))
+        dispatch(setCurrentPageActionCreator(page));
     },
     getUsersTotalCount: (usersTotalCount) => {
-        dispatch(getUsersTotalCountActionCreator(usersTotalCount))
-    }
+        dispatch(getUsersTotalCountActionCreator(usersTotalCount));
+    },
 });
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UsersApiComponent);
 
 export default UsersContainer;

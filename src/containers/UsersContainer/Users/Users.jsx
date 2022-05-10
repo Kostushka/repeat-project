@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 // import { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import {
@@ -8,67 +7,50 @@ import axios from 'axios';
 // } from '../../store/reducers/usersPage-reducer';
 import styles from './Users.module.css';
 
-class Users extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-    componentDidMount() {
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
-            )
-            .then((data) => {
-                this.props.getUsers(data.data.items);
-                this.props.getUsersTotalCount(data.data.totalCount);
-            });
+const Users = ({
+    usersTotalCount,
+    usersCount,
+    currentPage,
+    onPageChange,
+    users,
+    unfollow,
+    follow,
+}) => {
+    const pagesCount = Math.ceil(usersTotalCount / usersCount);
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
-    onPageChange = (page) => {
-        this.props.setCurrentPage(page);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
-            )
-            .then((data) => this.props.getUsers(data.data.items));
-    };
-    render() {
-        const pagesCount = Math.ceil(
-            this.props.usersTotalCount / this.props.usersCount
-        );
-        const pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-        return (
-            <>
-                <div className={styles.pages_container}>
-                    {pages.map((page) => (
-                        <span
-                            key={page}
-                            className={
-                                (this.props.currentPage === page &&
-                                    styles.current_page) ||
-                                styles.page
-                            }
-                            onClick={() => this.onPageChange(page)}
-                        >
-                            {page}
-                        </span>
-                    ))}
-                </div>
-                {this.props.users.map((el) => (
-                    <div key={el.id}>
-                        <img
-                            className={styles.img}
-                            src={
-                                el.photos.small ||
-                                'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
-                            }
-                            alt={el.name}
-                        />
-                        <div>{el.name}</div>
-                        {/* <div>{el.location.country}</div> */}
-                        {/* <div>{el.location.city}</div> */}
-                        {/* <button
+    return (
+        <>
+            <div className={styles.pages_container}>
+                {pages.map((page) => (
+                    <span
+                        key={page}
+                        className={
+                            (currentPage === page && styles.current_page) ||
+                            styles.page
+                        }
+                        onClick={() => onPageChange(page)}
+                    >
+                        {page}
+                    </span>
+                ))}
+            </div>
+            {users.map((el) => (
+                <div key={el.id}>
+                    <img
+                        className={styles.img}
+                        src={
+                            el.photos.small ||
+                            'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
+                        }
+                        alt={el.name}
+                    />
+                    <div>{el.name}</div>
+                    {/* <div>{el.location.country}</div> */}
+                    {/* <div>{el.location.city}</div> */}
+                    {/* <button
                                     onClick={() => {
                                         handleButton(el.id, el.followed);
                                     }}
@@ -76,21 +58,20 @@ class Users extends React.Component {
                                     {el.followed ? 'Отписаться' : 'Подписаться'}
                                 </button> */}
 
-                        {el.followed ? (
-                            <button onClick={() => this.props.unfollow(el.id)}>
-                                Отписаться
-                            </button>
-                        ) : (
-                            <button onClick={() => this.props.follow(el.id)}>
-                                Подписаться
-                            </button>
-                        )}
-                    </div>
-                ))}
-            </>
-        );
-    }
-}
+                    {el.followed ? (
+                        <button onClick={() => unfollow(el.id)}>
+                            Отписаться
+                        </button>
+                    ) : (
+                        <button onClick={() => follow(el.id)}>
+                            Подписаться
+                        </button>
+                    )}
+                </div>
+            ))}
+        </>
+    );
+};
 
 // const Users = ({ users, follow, unfollow, getUsers }) => {
 //     // const { users } = useSelector((state) => state.usersPage);
