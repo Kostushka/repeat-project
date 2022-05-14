@@ -6,28 +6,35 @@ import {
     getUsersActionCreator,
     getUsersTotalCountActionCreator,
     setCurrentPageActionCreator,
+    toggleIsLoadingActionCreator,
     unfollowActionCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
 
 class UsersApiComponent extends React.Component {
     componentDidMount() {
+        this.props.toggleIsLoading(true);
         axios
             .get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
             )
             .then((data) => {
+                this.props.toggleIsLoading(false);
                 this.props.getUsers(data.data.items);
                 this.props.getUsersTotalCount(data.data.totalCount);
             });
     }
     onPageChange = (page) => {
         this.props.setCurrentPage(page);
+        this.props.toggleIsLoading(true);
         axios
             .get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
             )
-            .then((data) => this.props.getUsers(data.data.items));
+            .then((data) => {
+                this.props.toggleIsLoading(false);
+                this.props.getUsers(data.data.items);
+            });
     };
     render() {
         return (
@@ -39,6 +46,7 @@ class UsersApiComponent extends React.Component {
                 users={this.props.users}
                 unfollow={this.props.unfollow}
                 follow={this.props.follow}
+                isLoading={this.props.isLoading}
             />
         );
     }
@@ -49,6 +57,7 @@ const mapStateToProps = (state) => ({
     usersTotalCount: state.usersPage.usersTotalCount,
     usersCount: state.usersPage.usersCount,
     currentPage: state.usersPage.currentPage,
+    isLoading: state.usersPage.isLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
     follow: (id) => {
@@ -65,6 +74,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getUsersTotalCount: (usersTotalCount) => {
         dispatch(getUsersTotalCountActionCreator(usersTotalCount));
+    },
+    toggleIsLoading: (isLoading) => {
+        dispatch(toggleIsLoadingActionCreator(isLoading));
     },
 });
 const UsersContainer = connect(

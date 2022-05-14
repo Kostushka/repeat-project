@@ -3,9 +3,11 @@ const UNFOLLOW = 'UNFOLLOW';
 const GET_USERS = 'GET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const GET_USERS_TOTAL_COUNT = 'GET_USERS_TOTAL_COUNT';
+const TOGGLE_IS_LOADING = 'TOGGLE_IS_LOADING';
 
 const initialState = {
     users: [],
+    isLoading: false,
     usersTotalCount: 0,
     usersCount: 100,
     currentPage: 1,
@@ -13,6 +15,9 @@ const initialState = {
 
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case TOGGLE_IS_LOADING:
+            return { ...state, isLoading: action.isLoading };
+
         case FOLLOW:
             return {
                 ...state,
@@ -48,6 +53,11 @@ export const usersReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export const toggleIsLoadingActionCreator = (isLoading) => ({
+    type: TOGGLE_IS_LOADING,
+    isLoading,
+});
 
 export const followActionCreator = (userId) => ({
     type: FOLLOW,

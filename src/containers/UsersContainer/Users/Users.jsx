@@ -5,6 +5,7 @@ import React from 'react';
 //     followActionCreator,
 //     unfollowActionCreator,
 // } from '../../store/reducers/usersPage-reducer';
+import UiPreloader from '../../../components/UI/UiPreloader/UiPreloader';
 import styles from './Users.module.css';
 
 const Users = ({
@@ -15,6 +16,7 @@ const Users = ({
     users,
     unfollow,
     follow,
+    isLoading,
 }) => {
     const pagesCount = Math.ceil(usersTotalCount / usersCount);
     const pages = [];
@@ -37,20 +39,23 @@ const Users = ({
                     </span>
                 ))}
             </div>
-            {users.map((el) => (
-                <div key={el.id}>
-                    <img
-                        className={styles.img}
-                        src={
-                            el.photos.small ||
-                            'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
-                        }
-                        alt={el.name}
-                    />
-                    <div>{el.name}</div>
-                    {/* <div>{el.location.country}</div> */}
-                    {/* <div>{el.location.city}</div> */}
-                    {/* <button
+            {isLoading ? (
+                <UiPreloader />
+            ) : (
+                users.map((el) => (
+                    <div key={el.id}>
+                        <img
+                            className={styles.img}
+                            src={
+                                el.photos.small ||
+                                'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
+                            }
+                            alt={el.name}
+                        />
+                        <div>{el.name}</div>
+                        {/* <div>{el.location.country}</div> */}
+                        {/* <div>{el.location.city}</div> */}
+                        {/* <button
                                     onClick={() => {
                                         handleButton(el.id, el.followed);
                                     }}
@@ -58,17 +63,18 @@ const Users = ({
                                     {el.followed ? 'Отписаться' : 'Подписаться'}
                                 </button> */}
 
-                    {el.followed ? (
-                        <button onClick={() => unfollow(el.id)}>
-                            Отписаться
-                        </button>
-                    ) : (
-                        <button onClick={() => follow(el.id)}>
-                            Подписаться
-                        </button>
-                    )}
-                </div>
-            ))}
+                        {el.followed ? (
+                            <button onClick={() => unfollow(el.id)}>
+                                Отписаться
+                            </button>
+                        ) : (
+                            <button onClick={() => follow(el.id)}>
+                                Подписаться
+                            </button>
+                        )}
+                    </div>
+                ))
+            )}
         </>
     );
 };
