@@ -6,17 +6,17 @@ import styles from './Post.module.css';
 const Post = ({
     posts,
     newPostText,
-    onChangePost,
-    onClickChangePostButton,
+    updatePostTextActionCreator,
+    addPostActionCreator,
 }) => {
     const ref = useRef();
 
     const addNewPost = () => {
-        onClickChangePostButton();
+        addPostActionCreator();
     };
     const onPostChange = () => {
         const value = ref.current.value;
-        onChangePost(value);
+        updatePostTextActionCreator(value);
     };
     return (
         <div className={styles.container}>

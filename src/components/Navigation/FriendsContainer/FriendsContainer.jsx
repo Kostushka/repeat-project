@@ -9,14 +9,17 @@ const mapStateToProps = (state) => ({
     friends: state.friendsPage.friends,
     newFriendName: state.friendsPage.newFriendName,
 });
-const mapDispatchToProps = (dispatch) => ({
-    onClickChangeNameButton: () => {
-        dispatch(addFriendActionCreator());
-    },
-    onChangeName: (value) => {
-        dispatch(updateNewFriendsNameActionCreator(value));
-    },
-});
-const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends);
+// const mapDispatchToProps = (dispatch) => ({
+//     onClickChangeNameButton: () => {
+//         dispatch(addFriendActionCreator());
+//     },
+//     onChangeName: (value) => {
+//         dispatch(updateNewFriendsNameActionCreator(value));
+//     },
+// });
+const FriendsContainer = connect(mapStateToProps, {
+    addFriendActionCreator,
+    updateNewFriendsNameActionCreator,
+})(Friends);
 
 export default FriendsContainer;

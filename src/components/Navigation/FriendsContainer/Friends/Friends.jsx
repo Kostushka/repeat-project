@@ -3,15 +3,15 @@ import styles from './Friends.module.css';
 const Friends = ({
     friends,
     newFriendName,
-    onChangeName,
-    onClickChangeNameButton,
+    updateNewFriendsNameActionCreator,
+    addFriendActionCreator,
 }) => {
     const handleChange = (e) => {
         const value = e.target.value;
-        onChangeName(value); //просто функция колбэк
+        updateNewFriendsNameActionCreator(value);
     };
     const handleClick = () => {
-        onClickChangeNameButton(); //просто функция колбэк
+        addFriendActionCreator();
     };
     return (
         <div className={styles.container}>

@@ -8,17 +8,17 @@ import { useSelector } from 'react-redux';
 const Dialogs = ({
     dialogs,
     newDialogText,
-    onChangeMessage,
-    onClickChangeMessage,
+    updateMessageTextActionCreator,
+    addMessageActionCreator,
 }) => {
     const ref = useRef();
 
     const addNewMessage = () => {
-        onClickChangeMessage(); //просто функция колбэк
+        addMessageActionCreator();
     };
     const onMessageChange = () => {
         const value = ref.current.value;
-        onChangeMessage(value); //просто функция колбэк
+        updateMessageTextActionCreator(value);
     };
     return (
         <div className={styles.wrapper}>

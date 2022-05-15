@@ -13,27 +13,29 @@ import Users from './Users';
 
 class UsersApiComponent extends React.Component {
     componentDidMount() {
-        this.props.toggleIsLoading(true);
+        this.props.toggleIsLoadingActionCreator(true);
         axios
             .get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
             )
             .then((data) => {
-                this.props.toggleIsLoading(false);
-                this.props.getUsers(data.data.items);
-                this.props.getUsersTotalCount(data.data.totalCount);
+                this.props.toggleIsLoadingActionCreator(false);
+                this.props.getUsersActionCreator(data.data.items);
+                this.props.getUsersTotalCountActionCreator(
+                    data.data.totalCount
+                );
             });
     }
     onPageChange = (page) => {
-        this.props.setCurrentPage(page);
-        this.props.toggleIsLoading(true);
+        this.props.setCurrentPageActionCreator(page);
+        this.props.toggleIsLoadingActionCreator(true);
         axios
             .get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
             )
             .then((data) => {
-                this.props.toggleIsLoading(false);
-                this.props.getUsers(data.data.items);
+                this.props.toggleIsLoadingActionCreator(false);
+                this.props.getUsersActionCreator(data.data.items);
             });
     };
     render() {
@@ -44,8 +46,8 @@ class UsersApiComponent extends React.Component {
                 currentPage={this.props.currentPage}
                 onPageChange={this.onPageChange}
                 users={this.props.users}
-                unfollow={this.props.unfollow}
-                follow={this.props.follow}
+                unfollow={this.props.unfollowActionCreator}
+                follow={this.props.followActionCreator}
                 isLoading={this.props.isLoading}
             />
         );
@@ -59,29 +61,33 @@ const mapStateToProps = (state) => ({
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
 });
-const mapDispatchToProps = (dispatch) => ({
-    follow: (id) => {
-        dispatch(followActionCreator(id));
-    },
-    unfollow: (id) => {
-        dispatch(unfollowActionCreator(id));
-    },
-    getUsers: (users) => {
-        dispatch(getUsersActionCreator(users));
-    },
-    setCurrentPage: (page) => {
-        dispatch(setCurrentPageActionCreator(page));
-    },
-    getUsersTotalCount: (usersTotalCount) => {
-        dispatch(getUsersTotalCountActionCreator(usersTotalCount));
-    },
-    toggleIsLoading: (isLoading) => {
-        dispatch(toggleIsLoadingActionCreator(isLoading));
-    },
-});
-const UsersContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UsersApiComponent);
+// const mapDispatchToProps = (dispatch) => ({
+//     follow: (id) => {
+//         dispatch(followActionCreator(id));
+//     },
+//     unfollow: (id) => {
+//         dispatch(unfollowActionCreator(id));
+//     },
+//     getUsers: (users) => {
+//         dispatch(getUsersActionCreator(users));
+//     },
+//     setCurrentPage: (page) => {
+//         dispatch(setCurrentPageActionCreator(page));
+//     },
+//     getUsersTotalCount: (usersTotalCount) => {
+//         dispatch(getUsersTotalCountActionCreator(usersTotalCount));
+//     },
+//     toggleIsLoading: (isLoading) => {
+//         dispatch(toggleIsLoadingActionCreator(isLoading));
+//     },
+// });
+const UsersContainer = connect(mapStateToProps, {
+    followActionCreator,
+    unfollowActionCreator,
+    getUsersActionCreator,
+    setCurrentPageActionCreator,
+    getUsersTotalCountActionCreator,
+    toggleIsLoadingActionCreator,
+})(UsersApiComponent);
 
 export default UsersContainer;
