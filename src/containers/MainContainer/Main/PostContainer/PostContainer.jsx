@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import {
-    addPostActionCreator,
     updatePostTextActionCreator,
-} from '../../../store/reducers/mainPage-reducer';
+    addPostActionCreator,
+} from '../../../../store/reducers/mainPage-reducer';
 import Post from './Post';
 
 const mapStateToProps = (state) => ({

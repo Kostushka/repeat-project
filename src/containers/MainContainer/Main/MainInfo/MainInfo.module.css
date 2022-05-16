@@ -1,0 +1,21 @@
+.img {
+    width: 500px;
+}
+.main {
+    padding: 20px 0 0 20px;
+}
+.profile {
+    width: 200px;
+    object-fit: cover;
+    object-position: center center;
+}
+.container_info {
+    margin-left: 20px;
+}
+div span {
+    font-weight: bold;
+    color: rgb(154, 224, 12);
+}
+div div {
+    margin-top: 5px;
+}

@@ -1,7 +1,9 @@
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const initialState = {
+    profile: null,
     posts: [
         { id: 1, message: 'Hello' },
         { id: 2, message: 'Hi' },
@@ -13,6 +15,9 @@ const initialState = {
 
 export const mainPageReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_USER_PROFILE:
+            return { ...state, profile: action.profile };
+
         case ADD_POST:
             const newPost = {
                 id: Math.random(),
@@ -32,6 +37,11 @@ export const mainPageReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export const setUserProfileActionCreator = (profile) => ({
+    type: SET_USER_PROFILE,
+    profile,
+});
 
 export const addPostActionCreator = () => ({
     type: ADD_POST,

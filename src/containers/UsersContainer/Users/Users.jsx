@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import {
 //     followActionCreator,
 //     unfollowActionCreator,
 // } from '../../store/reducers/usersPage-reducer';
-import UiPreloader from '../../../components/UI/UiPreloader/UiPreloader';
+import UiPreloader from '../../../components/UI/UiPreloader';
 import styles from './Users.module.css';
 
 const Users = ({
@@ -44,14 +45,16 @@ const Users = ({
             ) : (
                 users.map((el) => (
                     <div key={el.id}>
-                        <img
-                            className={styles.img}
-                            src={
-                                el.photos.small ||
-                                'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
-                            }
-                            alt={el.name}
-                        />
+                        <Link to={`/main/${el.id}`}>
+                            <img
+                                className={styles.img}
+                                src={
+                                    el.photos.small ||
+                                    'https://abrakadabra.fun/uploads/posts/2022-03/1647337970_2-abrakadabra-fun-p-freid-art-5.jpg'
+                                }
+                                alt={el.name}
+                            />
+                        </Link>
                         <div>{el.name}</div>
                         {/* <div>{el.location.country}</div> */}
                         {/* <div>{el.location.city}</div> */}
