@@ -1,5 +1,6 @@
 import UiPreloader from '../../../../components/UI/UiPreloader';
 import mainImg from '../../../../assets/mainPhoto.jpeg';
+import profileImg from '../../../../assets/mainPhoto.jpeg';
 import styles from './MainInfo.module.css';
 
 const MainInfo = ({ profile }) => {
@@ -15,7 +16,7 @@ const MainInfo = ({ profile }) => {
             <div className={styles.container_info}>
                 <img
                     className={styles.profile}
-                    src={profile.photos.large}
+                    src={profile.photos.large || profileImg}
                     alt='profile'
                 />
                 <p>
