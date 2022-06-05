@@ -1,0 +1,17 @@
+.header {
+    grid-area: header;
+    background-color: lightgrey;
+}
+
+.login {
+    color: orangered;
+    text-align: end;
+    margin-right: 10px;
+}
+
+.link {
+    color: black;
+}
+.link a {
+    text-decoration: underline;
+}
