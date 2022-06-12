@@ -16,7 +16,8 @@ class UsersApiComponent extends React.Component {
         this.props.toggleIsLoadingActionCreator(true);
         axios
             .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`,
+                { withCredentials: true }
             )
             .then((data) => {
                 this.props.toggleIsLoadingActionCreator(false);
@@ -31,7 +32,8 @@ class UsersApiComponent extends React.Component {
         this.props.toggleIsLoadingActionCreator(true);
         axios
             .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`
+                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`,
+                { withCredentials: true }
             )
             .then((data) => {
                 this.props.toggleIsLoadingActionCreator(false);

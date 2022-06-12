@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,41 @@ const Users = ({
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+    const onFollow = (id) => {
+        axios
+            .post(
+                `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+                {},
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': 'f438c343-2e0e-4d82-939d-054e331035e4',
+                    },
+                }
+            )
+            .then((data) => {
+                if (data.data.resultCode === 0) {
+                    follow(id);
+                }
+            });
+    };
+    const onUnfollow = (id) => {
+        axios
+            .delete(
+                `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': 'f438c343-2e0e-4d82-939d-054e331035e4',
+                    },
+                }
+            )
+            .then((data) => {
+                if (data.data.resultCode === 0) {
+                    unfollow(id);
+                }
+            });
+    };
     return (
         <>
             <div className={styles.pages_container}>
@@ -67,11 +103,11 @@ const Users = ({
                                 </button> */}
 
                         {el.followed ? (
-                            <button onClick={() => unfollow(el.id)}>
+                            <button onClick={() => onUnfollow(el.id)}>
                                 Отписаться
                             </button>
                         ) : (
-                            <button onClick={() => follow(el.id)}>
+                            <button onClick={() => onFollow(el.id)}>
                                 Подписаться
                             </button>
                         )}
