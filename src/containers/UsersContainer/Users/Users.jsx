@@ -107,7 +107,10 @@ const Users = ({
                                 Отписаться
                             </button>
                         ) : (
-                            <button onClick={() => onFollow(el.id)}>
+                            <button
+                                className={styles.btn}
+                                onClick={() => onFollow(el.id)}
+                            >
                                 Подписаться
                             </button>
                         )}
