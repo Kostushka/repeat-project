@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,7 @@ import { Link } from 'react-router-dom';
 // } from '../../store/reducers/usersPage-reducer';
 import UiPreloader from '../../../components/UI/UiPreloader';
 import styles from './Users.module.css';
+import { usersApi } from '../../../api/usersAPi';
 
 const Users = ({
     usersTotalCount,
@@ -26,39 +26,18 @@ const Users = ({
         pages.push(i);
     }
     const onFollow = (id) => {
-        axios
-            .post(
-                `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-                {},
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': 'f438c343-2e0e-4d82-939d-054e331035e4',
-                    },
-                }
-            )
-            .then((data) => {
-                if (data.data.resultCode === 0) {
-                    follow(id);
-                }
-            });
+        usersApi.postFollow(id).then((data) => {
+            if (data.resultCode === 0) {
+                follow(id);
+            }
+        });
     };
     const onUnfollow = (id) => {
-        axios
-            .delete(
-                `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': 'f438c343-2e0e-4d82-939d-054e331035e4',
-                    },
-                }
-            )
-            .then((data) => {
-                if (data.data.resultCode === 0) {
-                    unfollow(id);
-                }
-            });
+        usersApi.deleteFollow(id).then((data) => {
+            if (data.resultCode === 0) {
+                unfollow(id);
+            }
+        });
     };
     return (
         <>

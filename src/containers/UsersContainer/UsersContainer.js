@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import {
     followActionCreator,
@@ -10,34 +9,27 @@ import {
     unfollowActionCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
+import { usersApi } from '../../api/usersAPi';
 
 class UsersApiComponent extends React.Component {
     componentDidMount() {
         this.props.toggleIsLoadingActionCreator(true);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersCount}`,
-                { withCredentials: true }
-            )
+        usersApi
+            .getUsers(this.props.currentPage, this.props.usersCount)
             .then((data) => {
                 this.props.toggleIsLoadingActionCreator(false);
-                this.props.getUsersActionCreator(data.data.items);
-                this.props.getUsersTotalCountActionCreator(
-                    data.data.totalCount
-                );
+                this.props.getUsersActionCreator(data.items);
+                this.props.getUsersTotalCountActionCreator(data.totalCount);
             });
     }
     onPageChange = (page) => {
         this.props.setCurrentPageActionCreator(page);
         this.props.toggleIsLoadingActionCreator(true);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersCount}`,
-                { withCredentials: true }
-            )
+        usersApi
+            .getUsersOnPageChange(page, this.props.usersCount)
             .then((data) => {
                 this.props.toggleIsLoadingActionCreator(false);
-                this.props.getUsersActionCreator(data.data.items);
+                this.props.getUsersActionCreator(data.items);
             });
     };
     render() {
