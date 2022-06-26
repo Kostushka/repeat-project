@@ -19,6 +19,8 @@ const Users = ({
     unfollow,
     follow,
     isLoading,
+    isFollowingProgress,
+    toggleFollowingProgress,
 }) => {
     const pagesCount = Math.ceil(usersTotalCount / usersCount);
     const pages = [];
@@ -26,17 +28,21 @@ const Users = ({
         pages.push(i);
     }
     const onFollow = (id) => {
+        toggleFollowingProgress(true, id);
         usersApi.postFollow(id).then((data) => {
             if (data.resultCode === 0) {
                 follow(id);
             }
+            toggleFollowingProgress(false, id);
         });
     };
     const onUnfollow = (id) => {
+        toggleFollowingProgress(true, id);
         usersApi.deleteFollow(id).then((data) => {
             if (data.resultCode === 0) {
                 unfollow(id);
             }
+            toggleFollowingProgress(false, id);
         });
     };
     return (
@@ -82,12 +88,21 @@ const Users = ({
                                 </button> */}
 
                         {el.followed ? (
-                            <button onClick={() => onUnfollow(el.id)}>
+                            <button
+                                disabled={isFollowingProgress.some(
+                                    (id) => id === el.id
+                                )}
+                                onClick={() => onUnfollow(el.id)}
+                                className={styles.btn_unfollowed}
+                            >
                                 Отписаться
                             </button>
                         ) : (
                             <button
-                                className={styles.btn}
+                                disabled={isFollowingProgress.some(
+                                    (id) => id === el.id
+                                )}
+                                className={styles.btn_followed}
                                 onClick={() => onFollow(el.id)}
                             >
                                 Подписаться

@@ -7,6 +7,7 @@ import {
     setCurrentPageActionCreator,
     toggleIsLoadingActionCreator,
     unfollowActionCreator,
+    toggleFollowingProgressActionCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
 import { usersApi } from '../../api/usersAPi';
@@ -43,6 +44,10 @@ class UsersApiComponent extends React.Component {
                 unfollow={this.props.unfollowActionCreator}
                 follow={this.props.followActionCreator}
                 isLoading={this.props.isLoading}
+                isFollowingProgress={this.props.isFollowingProgress}
+                toggleFollowingProgress={
+                    this.props.toggleFollowingProgressActionCreator
+                }
             />
         );
     }
@@ -54,6 +59,7 @@ const mapStateToProps = (state) => ({
     usersCount: state.usersPage.usersCount,
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
+    isFollowingProgress: state.usersPage.isFollowingProgress,
 });
 // const mapDispatchToProps = (dispatch) => ({
 //     follow: (id) => {
@@ -82,6 +88,7 @@ const UsersContainer = connect(mapStateToProps, {
     setCurrentPageActionCreator,
     getUsersTotalCountActionCreator,
     toggleIsLoadingActionCreator,
+    toggleFollowingProgressActionCreator,
 })(UsersApiComponent);
 
 export default UsersContainer;

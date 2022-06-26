@@ -25,8 +25,21 @@
     font-weight: bold;
     background-color: chocolate;
 }
-.btn {
+.btn_followed {
     background-color: greenyellow;
     border: 1px solid green;
     border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn_unfollowed {
+    background-color: rgba(212, 109, 41, 0.795);
+    border: 1px solid saddlebrown;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btn_followed:disabled,
+.btn_unfollowed:disabled {
+    background-color: gray;
+    cursor: progress;
 }
