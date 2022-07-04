@@ -2,36 +2,36 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
     followActionCreator,
-    getUsersActionCreator,
-    getUsersTotalCountActionCreator,
     setCurrentPageActionCreator,
-    toggleIsLoadingActionCreator,
     unfollowActionCreator,
     toggleFollowingProgressActionCreator,
+    getUsersThunkCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
-import { usersApi } from '../../api/usersAPi';
 
 class UsersApiComponent extends React.Component {
     componentDidMount() {
-        this.props.toggleIsLoadingActionCreator(true);
-        usersApi
-            .getUsers(this.props.currentPage, this.props.usersCount)
-            .then((data) => {
-                this.props.toggleIsLoadingActionCreator(false);
-                this.props.getUsersActionCreator(data.items);
-                this.props.getUsersTotalCountActionCreator(data.totalCount);
-            });
+        // this.props.toggleIsLoadingActionCreator(true);
+        // usersApi
+        //     .getUsers(this.props.currentPage, this.props.usersCount)
+        //     .then((data) => {
+        //         this.props.toggleIsLoadingActionCreator(false);
+        //         this.props.getUsersActionCreator(data.items);
+        //         this.props.getUsersTotalCountActionCreator(data.totalCount);
+        //     });
+        this.props.getUsersThunkCreator(
+            this.props.currentPage,
+            this.props.usersCount
+        );
     }
     onPageChange = (page) => {
         this.props.setCurrentPageActionCreator(page);
-        this.props.toggleIsLoadingActionCreator(true);
-        usersApi
-            .getUsersOnPageChange(page, this.props.usersCount)
-            .then((data) => {
-                this.props.toggleIsLoadingActionCreator(false);
-                this.props.getUsersActionCreator(data.items);
-            });
+        // this.props.toggleIsLoadingActionCreator(true);
+        // usersApi.getUsers(page, this.props.usersCount).then((data) => {
+        //     this.props.toggleIsLoadingActionCreator(false);
+        //     this.props.getUsersActionCreator(data.items);
+        // });
+        this.props.getUsersThunkCreator(page, this.props.usersCount);
     };
     render() {
         return (
@@ -84,11 +84,9 @@ const mapStateToProps = (state) => ({
 const UsersContainer = connect(mapStateToProps, {
     followActionCreator,
     unfollowActionCreator,
-    getUsersActionCreator,
     setCurrentPageActionCreator,
-    getUsersTotalCountActionCreator,
-    toggleIsLoadingActionCreator,
     toggleFollowingProgressActionCreator,
+    getUsersThunkCreator,
 })(UsersApiComponent);
 
 export default UsersContainer;

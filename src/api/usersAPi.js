@@ -14,11 +14,6 @@ export const usersApi = {
             .get(`users?page=${currentPage}&count=${usersCount}`)
             .then((res) => res.data);
     },
-    getUsersOnPageChange(page, usersCount) {
-        return instance
-            .get(`users?page=${page}&count=${usersCount}`)
-            .then((res) => res.data);
-    },
     postFollow(id) {
         return instance.post(`follow/${id}`).then((res) => res.data);
     },

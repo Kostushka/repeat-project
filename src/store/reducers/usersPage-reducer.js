@@ -1,3 +1,4 @@
+import { usersApi } from '../../api/usersAPi';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const GET_USERS = 'GET_USERS';
@@ -99,3 +100,12 @@ export const toggleFollowingProgressActionCreator = (isFetching, userId) => ({
     isFetching,
     userId,
 });
+
+export const getUsersThunkCreator = (currentPage, usersCount) => (dispatch) => {
+    dispatch(toggleIsLoadingActionCreator(true));
+    usersApi.getUsers(currentPage, usersCount).then((data) => {
+        dispatch(toggleIsLoadingActionCreator(false));
+        dispatch(getUsersActionCreator(data.items));
+        dispatch(getUsersTotalCountActionCreator(data.totalCount));
+    });
+};
