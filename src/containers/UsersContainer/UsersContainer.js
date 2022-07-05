@@ -6,6 +6,8 @@ import {
     unfollowActionCreator,
     toggleFollowingProgressActionCreator,
     getUsersThunkCreator,
+    postFollowThunkCreator,
+    deleteFollowThunkCreator,
 } from '../../store/reducers/usersPage-reducer';
 import Users from './Users';
 
@@ -48,6 +50,8 @@ class UsersApiComponent extends React.Component {
                 toggleFollowingProgress={
                     this.props.toggleFollowingProgressActionCreator
                 }
+                postFollowThunkCreator={this.props.postFollowThunkCreator}
+                deleteFollowThunkCreator={this.props.deleteFollowThunkCreator}
             />
         );
     }
@@ -87,6 +91,8 @@ const UsersContainer = connect(mapStateToProps, {
     setCurrentPageActionCreator,
     toggleFollowingProgressActionCreator,
     getUsersThunkCreator,
+    postFollowThunkCreator,
+    deleteFollowThunkCreator,
 })(UsersApiComponent);
 
 export default UsersContainer;

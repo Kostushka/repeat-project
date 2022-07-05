@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 // } from '../../store/reducers/usersPage-reducer';
 import UiPreloader from '../../../components/UI/UiPreloader';
 import styles from './Users.module.css';
-import { usersApi } from '../../../api/usersAPi';
 
 const Users = ({
     usersTotalCount,
@@ -16,11 +15,10 @@ const Users = ({
     currentPage,
     onPageChange,
     users,
-    unfollow,
-    follow,
     isLoading,
     isFollowingProgress,
-    toggleFollowingProgress,
+    postFollowThunkCreator,
+    deleteFollowThunkCreator,
 }) => {
     const pagesCount = Math.ceil(usersTotalCount / usersCount);
     const pages = [];
@@ -28,22 +26,24 @@ const Users = ({
         pages.push(i);
     }
     const onFollow = (id) => {
-        toggleFollowingProgress(true, id);
-        usersApi.postFollow(id).then((data) => {
-            if (data.resultCode === 0) {
-                follow(id);
-            }
-            toggleFollowingProgress(false, id);
-        });
+        // toggleFollowingProgress(true, id);
+        // usersApi.postFollow(id).then((data) => {
+        //     if (data.resultCode === 0) {
+        //         follow(id);
+        //     }
+        //     toggleFollowingProgress(false, id);
+        // });
+        postFollowThunkCreator(id);
     };
     const onUnfollow = (id) => {
-        toggleFollowingProgress(true, id);
-        usersApi.deleteFollow(id).then((data) => {
-            if (data.resultCode === 0) {
-                unfollow(id);
-            }
-            toggleFollowingProgress(false, id);
-        });
+        // toggleFollowingProgress(true, id);
+        // usersApi.deleteFollow(id).then((data) => {
+        //     if (data.resultCode === 0) {
+        //         unfollow(id);
+        //     }
+        //     toggleFollowingProgress(false, id);
+        // });
+        deleteFollowThunkCreator(id);
     };
     return (
         <>

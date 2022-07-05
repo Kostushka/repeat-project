@@ -109,3 +109,22 @@ export const getUsersThunkCreator = (currentPage, usersCount) => (dispatch) => {
         dispatch(getUsersTotalCountActionCreator(data.totalCount));
     });
 };
+
+export const postFollowThunkCreator = (id) => (dispatch) => {
+    dispatch(toggleFollowingProgressActionCreator(true, id));
+    usersApi.postFollow(id).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(followActionCreator(id));
+        }
+        dispatch(toggleFollowingProgressActionCreator(false, id));
+    });
+};
+export const deleteFollowThunkCreator = (id) => (dispatch) => {
+    dispatch(toggleFollowingProgressActionCreator(true, id));
+    usersApi.deleteFollow(id).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(unfollowActionCreator(id));
+        }
+        dispatch(toggleFollowingProgressActionCreator(false, id));
+    });
+};
