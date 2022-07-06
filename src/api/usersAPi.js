@@ -20,4 +20,7 @@ export const usersApi = {
     deleteFollow(id) {
         return instance.delete(`follow/${id}`).then((res) => res.data);
     },
+    auth() {
+        return instance.get('auth/me').then((res) => res.data);
+    },
 };

@@ -1,3 +1,5 @@
+import { usersApi } from '../../api/usersAPi';
+
 const SET_USER_AUTH = 'SET_USER_AUTH';
 
 let initialState = {
@@ -21,5 +23,13 @@ export const setUserAuthActionCreator = (payload) => ({
     type: SET_USER_AUTH,
     payload,
 });
+
+export const authThunkCreator = () => (dispatch) => {
+    usersApi.auth().then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(setUserAuthActionCreator(data.data));
+        }
+    });
+};
 
 export default authReducer;
