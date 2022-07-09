@@ -1,4 +1,4 @@
-import { usersApi } from '../../api/usersAPi';
+import { authApi } from '../../api/usersAPi';
 
 const SET_USER_AUTH = 'SET_USER_AUTH';
 
@@ -25,7 +25,7 @@ export const setUserAuthActionCreator = (payload) => ({
 });
 
 export const authThunkCreator = () => (dispatch) => {
-    usersApi.auth().then((data) => {
+    authApi.me().then((data) => {
         if (data.resultCode === 0) {
             dispatch(setUserAuthActionCreator(data.data));
         }
