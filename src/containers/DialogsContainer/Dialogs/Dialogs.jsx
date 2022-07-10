@@ -1,17 +1,23 @@
 import { useRef } from 'react';
 import UserName from './UserName';
 import Message from './Message';
+import { Redirect } from 'react-router';
 
 import styles from './Dialogs.module.css';
-import { useSelector } from 'react-redux';
 
 const Dialogs = ({
     dialogs,
     newDialogText,
     updateMessageTextActionCreator,
     addMessageActionCreator,
+    auth,
 }) => {
     const ref = useRef();
+
+    if (!auth) {
+        return <Redirect to='/login' />;
+        // window.location.replace('/login');
+    }
 
     const addNewMessage = () => {
         addMessageActionCreator();

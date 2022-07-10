@@ -4,6 +4,7 @@ import DialogsContainer from '../../containers/DialogsContainer';
 import MainContainer from '../../containers/MainContainer';
 import UsersContainer from '../../containers/UsersContainer';
 // import { configRoutes } from '../../routes/configRoutes';
+import Login from '../../containers/Login';
 
 const AppRouter = () => {
     return (
@@ -17,6 +18,7 @@ const AppRouter = () => {
             {/* <Route path='dialogs' element={<DialogsContainer />} /> */}
             <Route path='/dialogs/:id?' render={() => <DialogsContainer />} />
             <Route path='/users' render={() => <UsersContainer />} />
+            <Route path='/login' render={() => <Login />} />
         </>
     );
 };

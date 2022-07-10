@@ -8,6 +8,7 @@ import Dialogs from './Dialogs';
 const mapStateToProps = (state) => ({
     dialogs: state.dialogsPage.dialogs,
     newDialogText: state.dialogsPage.newDialogText,
+    auth: state.auth.isAuth,
 });
 // const mapDispatchToProps = (dispatch) => ({
 //     onChangeMessage(value) {

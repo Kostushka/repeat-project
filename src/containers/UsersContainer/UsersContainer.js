@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import {
     followActionCreator,
     setCurrentPageActionCreator,
@@ -36,6 +37,9 @@ class UsersApiComponent extends React.Component {
         this.props.getUsersThunkCreator(page, this.props.usersCount);
     };
     render() {
+        if (!this.props.auth) {
+            return <Redirect to='/login' />;
+        }
         return (
             <Users
                 usersTotalCount={this.props.usersTotalCount}
@@ -64,6 +68,7 @@ const mapStateToProps = (state) => ({
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
     isFollowingProgress: state.usersPage.isFollowingProgress,
+    auth: state.auth.isAuth,
 });
 // const mapDispatchToProps = (dispatch) => ({
 //     follow: (id) => {
