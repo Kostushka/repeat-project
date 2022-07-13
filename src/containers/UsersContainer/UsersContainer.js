@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
+import { withRedirect } from '../../hoc/withRedirect';
 import {
     followActionCreator,
     setCurrentPageActionCreator,
@@ -37,9 +37,9 @@ class UsersApiComponent extends React.Component {
         this.props.getUsersThunkCreator(page, this.props.usersCount);
     };
     render() {
-        if (!this.props.auth) {
-            return <Redirect to='/login' />;
-        }
+        // if (!this.props.auth) {
+        //     return <Redirect to='/login' />;
+        // }
         return (
             <Users
                 usersTotalCount={this.props.usersTotalCount}
@@ -68,7 +68,6 @@ const mapStateToProps = (state) => ({
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
     isFollowingProgress: state.usersPage.isFollowingProgress,
-    auth: state.auth.isAuth,
 });
 // const mapDispatchToProps = (dispatch) => ({
 //     follow: (id) => {
@@ -90,14 +89,16 @@ const mapStateToProps = (state) => ({
 //         dispatch(toggleIsLoadingActionCreator(isLoading));
 //     },
 // });
-const UsersContainer = connect(mapStateToProps, {
-    followActionCreator,
-    unfollowActionCreator,
-    setCurrentPageActionCreator,
-    toggleFollowingProgressActionCreator,
-    getUsersThunkCreator,
-    postFollowThunkCreator,
-    deleteFollowThunkCreator,
-})(UsersApiComponent);
+const UsersContainer = withRedirect(
+    connect(mapStateToProps, {
+        followActionCreator,
+        unfollowActionCreator,
+        setCurrentPageActionCreator,
+        toggleFollowingProgressActionCreator,
+        getUsersThunkCreator,
+        postFollowThunkCreator,
+        deleteFollowThunkCreator,
+    })(UsersApiComponent)
+);
 
 export default UsersContainer;
