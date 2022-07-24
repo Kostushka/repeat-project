@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRedirect } from '../../hoc/withRedirect';
 import {
     followActionCreator,
@@ -89,16 +90,26 @@ const mapStateToProps = (state) => ({
 //         dispatch(toggleIsLoadingActionCreator(isLoading));
 //     },
 // });
-const UsersContainer = withRedirect(
-    connect(mapStateToProps, {
-        followActionCreator,
-        unfollowActionCreator,
-        setCurrentPageActionCreator,
-        toggleFollowingProgressActionCreator,
-        getUsersThunkCreator,
-        postFollowThunkCreator,
-        deleteFollowThunkCreator,
-    })(UsersApiComponent)
-);
+// const UsersContainer = withRedirect(
+//     connect(mapStateToProps, {
+//         followActionCreator,
+//         unfollowActionCreator,
+//         setCurrentPageActionCreator,
+//         toggleFollowingProgressActionCreator,
+//         getUsersThunkCreator,
+//         postFollowThunkCreator,
+//         deleteFollowThunkCreator,
+//     })(UsersApiComponent)
+// );
 
-export default UsersContainer;
+// export default UsersContainer;
+
+export default compose(withRedirect, connect(mapStateToProps, {
+    followActionCreator,
+    unfollowActionCreator,
+    setCurrentPageActionCreator,
+    toggleFollowingProgressActionCreator,
+    getUsersThunkCreator,
+    postFollowThunkCreator,
+    deleteFollowThunkCreator,
+}))(UsersApiComponent)

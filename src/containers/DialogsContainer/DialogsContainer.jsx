@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRedirect } from '../../hoc/withRedirect';
 import {
     addMessageActionCreator,
@@ -18,11 +19,17 @@ const mapStateToProps = (state) => ({
 //         dispatch(addMessageActionCreator());
 //     },
 // });
-const DialogsContainer = withRedirect(
+// const DialogsContainer = withRedirect(
+//     connect(mapStateToProps, {
+//         updateMessageTextActionCreator,
+//         addMessageActionCreator,
+//     })(Dialogs)
+// );
+
+export default compose(
+    withRedirect,
     connect(mapStateToProps, {
         updateMessageTextActionCreator,
         addMessageActionCreator,
-    })(Dialogs)
-);
-
-export default DialogsContainer;
+    })
+)(Dialogs);
