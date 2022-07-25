@@ -1,0 +1,14 @@
+.status {
+    display: block;
+    margin: 10px;
+    color: tomato;
+}
+.status:hover,
+.input_status:hover {
+    cursor: pointer;
+}
+.input_status {
+    display: block;
+    margin: 10px;
+    outline: none;
+}

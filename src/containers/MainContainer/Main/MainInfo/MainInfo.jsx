@@ -1,16 +1,18 @@
 import UiPreloader from '../../../../components/UI/UiPreloader';
 import mainImg from '../../../../assets/mainPhoto.jpeg';
 import profileImg from '../../../../assets/mainPhoto.jpeg';
+import MainStatus from './MainStatus';
+
 import styles from './MainInfo.module.css';
 
 const MainInfo = ({ profile }) => {
     if (!profile) {
         return <UiPreloader />;
     }
-    console.log(profile.contacts);
     return (
         <>
-            <img className={styles.img} src={mainImg} alt='main' />
+            {/* <img className={styles.img} src={mainImg} alt='main' /> */}
+            <MainStatus />
             <div className={styles.main}>Основная часть</div>
 
             <div className={styles.container_info}>
