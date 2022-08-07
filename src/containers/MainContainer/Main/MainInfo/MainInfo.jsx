@@ -5,14 +5,14 @@ import MainStatus from './MainStatus';
 
 import styles from './MainInfo.module.css';
 
-const MainInfo = ({ profile }) => {
+const MainInfo = ({ profile, status, updateUserStatus }) => {
     if (!profile) {
         return <UiPreloader />;
     }
     return (
         <>
             {/* <img className={styles.img} src={mainImg} alt='main' /> */}
-            <MainStatus />
+            <MainStatus status={status} updateUserStatus={updateUserStatus} />
             <div className={styles.main}>Основная часть</div>
 
             <div className={styles.container_info}>

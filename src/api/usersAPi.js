@@ -23,6 +23,14 @@ export const usersApi = {
     getUserProfile(id) {
         return instance.get(`profile/${id}`).then((res) => res.data);
     },
+    getUserStatus(id) {
+        return instance.get(`profile/status/${id}`).then((res) => res.data);
+    },
+    updateUserStatus(status) {
+        return instance
+            .put(`profile/status`, { status })
+            .then((res) => res.data.data);
+    },
 };
 
 export const authApi = {

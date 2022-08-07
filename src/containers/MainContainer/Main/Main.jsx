@@ -1,10 +1,14 @@
 import MainInfo from './MainInfo';
 import PostContainer from './PostContainer/PostContainer';
 
-const Main = ({ profile }) => {
+const Main = ({ profile, status, updateUserStatus }) => {
     return (
         <main>
-            <MainInfo profile={profile} />
+            <MainInfo
+                profile={profile}
+                status={status}
+                updateUserStatus={updateUserStatus}
+            />
             <PostContainer />
         </main>
     );

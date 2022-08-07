@@ -4,7 +4,7 @@ import styles from './MainStatus.module.css';
 class MainStatus extends React.Component {
     state = {
         editMode: false,
-        inputText: 'Здравствуй, друг!',
+        inputText: this.props.status,
     };
     addInputText(e) {
         this.setState({
@@ -20,7 +20,13 @@ class MainStatus extends React.Component {
         this.setState({
             editMode: false,
         });
+        this.props.updateUserStatus(this.state.inputText);
     };
+    componentDidUpdate(prevProps) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({ inputText: this.props.status });
+        }
+    }
     render() {
         return (
             <>
@@ -37,7 +43,7 @@ class MainStatus extends React.Component {
                         onDoubleClick={this.activateMode.bind(this)}
                         className={styles.status}
                     >
-                        {this.state.inputText}
+                        {this.state.inputText || 'Статуса нет'}
                     </span>
                 )}
             </>

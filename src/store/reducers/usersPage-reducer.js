@@ -6,6 +6,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const GET_USERS_TOTAL_COUNT = 'GET_USERS_TOTAL_COUNT';
 const TOGGLE_IS_LOADING = 'TOGGLE_IS_LOADING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
+const GET_USER_STATUS = 'GET_USER_STATUS';
 
 const initialState = {
     users: [],
@@ -14,6 +15,7 @@ const initialState = {
     usersTotalCount: 0,
     usersCount: 100,
     currentPage: 1,
+    status: 'Статус отсутствует',
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -61,6 +63,8 @@ export const usersReducer = (state = initialState, action) => {
 
         case GET_USERS_TOTAL_COUNT:
             return { ...state, usersTotalCount: action.usersTotalCount };
+        case GET_USER_STATUS:
+            return { ...state, status: action.payload };
 
         default:
             return state;
@@ -101,6 +105,11 @@ export const toggleFollowingProgressActionCreator = (isFetching, userId) => ({
     userId,
 });
 
+export const getUserStatusActionCreator = (status) => ({
+    type: GET_USER_STATUS,
+    payload: status,
+});
+
 export const getUsersThunkCreator = (currentPage, usersCount) => (dispatch) => {
     dispatch(toggleIsLoadingActionCreator(true));
     usersApi.getUsers(currentPage, usersCount).then((data) => {
@@ -126,5 +135,20 @@ export const deleteFollowThunkCreator = (id) => (dispatch) => {
             dispatch(unfollowActionCreator(id));
         }
         dispatch(toggleFollowingProgressActionCreator(false, id));
+    });
+};
+
+export const getUserStatusThunkCreator = (id) => (dispatch) => {
+    usersApi.getUserStatus(id).then((data) => {
+        console.log(data);
+        dispatch(getUserStatusActionCreator(data));
+    });
+};
+
+export const updateUserStatusThunkCreator = (status) => (dispatch) => {
+    usersApi.updateUserStatus(status).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(getUserStatusActionCreator(data));
+        }
     });
 };
