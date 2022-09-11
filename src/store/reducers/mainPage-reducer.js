@@ -12,7 +12,7 @@ const initialState = {
         { id: 3, message: 'Hey' },
         { id: 4, message: 'Lala' },
     ],
-    newPostText: '',
+    // newPostText: '',
 };
 
 export const mainPageReducer = (state = initialState, action) => {
@@ -23,14 +23,15 @@ export const mainPageReducer = (state = initialState, action) => {
         case ADD_POST:
             const newPost = {
                 id: Math.random(),
-                message: state.newPostText,
+                ...action.values,
             };
+
             // state.posts.push(newPost);
             // state.newPostText = '';
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: '',
+                // newPostText: '',
             };
         case UPDATE_POST_TEXT:
             // state.newPostText = action.postText;
@@ -45,8 +46,9 @@ export const setUserProfileActionCreator = (profile) => ({
     profile,
 });
 
-export const addPostActionCreator = () => ({
+export const addPostActionCreator = (values) => ({
     type: ADD_POST,
+    values,
 });
 export const updatePostTextActionCreator = (postText) => ({
     type: UPDATE_POST_TEXT,
