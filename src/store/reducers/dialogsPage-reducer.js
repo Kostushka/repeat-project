@@ -49,7 +49,7 @@ export const dialogsPageReducer = (state = initialState, action) => {
             const newDialogs = {
                 id: Math.random(),
                 name: 'Неизвестный пользователь',
-                message: state.newDialogText,
+                ...action.message,
                 img: 'https://sun9-45.userapi.com/sun9-83/impg/STFNc3YmLhPBKpAeuQTuG1cBXisgOoAL-lLbHw/U1bk80ll7yQ.jpg?size=604x528&quality=96&sign=d48c6a090f22ada85adc0821acf2946c&type=album',
             };
             // state.dialogs.push(newDialogs);
@@ -67,8 +67,9 @@ export const dialogsPageReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessageActionCreator = () => ({
+export const addMessageActionCreator = (message) => ({
     type: ADD_MESSAGE,
+    message,
 });
 export const updateMessageTextActionCreator = (messageText) => ({
     type: UPDATE_MESSAGE_TEXT,

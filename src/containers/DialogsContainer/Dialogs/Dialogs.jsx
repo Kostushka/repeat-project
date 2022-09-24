@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useFormik } from 'formik';
+// import { useRef } from 'react';
 import UserName from './UserName';
 import Message from './Message';
 
@@ -11,20 +12,29 @@ const Dialogs = ({
     addMessageActionCreator,
     // auth,
 }) => {
-    const ref = useRef();
+    // const ref = useRef();
+    const formik = useFormik({
+        initialValues: {
+            message: '',
+        },
+        onSubmit: (values, { resetForm }) => {
+            addMessageActionCreator(values);
+            resetForm({ values: '' });
+        },
+    });
 
     // if (!auth) {
     //     return <Redirect to='/login' />;
     //     // window.location.replace('/login');
     // }
 
-    const addNewMessage = () => {
-        addMessageActionCreator();
-    };
-    const onMessageChange = () => {
-        const value = ref.current.value;
-        updateMessageTextActionCreator(value);
-    };
+    // const addNewMessage = () => {
+    //     addMessageActionCreator();
+    // };
+    // const onMessageChange = () => {
+    //     const value = ref.current.value;
+    //     updateMessageTextActionCreator(value);
+    // };
     return (
         <div className={styles.wrapper}>
             <h1>Диалоги</h1>
@@ -36,17 +46,20 @@ const Dialogs = ({
                     </div>
                 ))}
             </div>
-            <div>
+            <form onSubmit={formik.handleSubmit}>
                 <textarea
                     placeholder='Введите текст'
-                    ref={ref}
-                    value={newDialogText}
-                    onChange={onMessageChange}
+                    name='message'
+                    // ref={ref}
+                    // value={newDialogText}
+                    // onChange={onMessageChange}
+                    value={formik.values.message}
+                    onChange={formik.handleChange}
                 />
                 <div>
-                    <button onClick={addNewMessage}>Добавить сообщение</button>
+                    <button>Добавить сообщение</button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };
