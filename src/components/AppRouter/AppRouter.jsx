@@ -12,7 +12,6 @@ const AppRouter = () => {
             {/* {configRoutes.map((el) => (
                 <Route key={el.path} path={el.path} element={el.element} />
             ))} */}
-
             <Route exact path='/' render={() => <MainContainer />} />
             {/* <Route path='main' element={<MainContainer />} /> */}
             <Route path='/main/:id?' render={() => <MainContainer />} />
